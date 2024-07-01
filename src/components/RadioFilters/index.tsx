@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import React, { useState, useEffect, Suspense } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -54,4 +56,10 @@ const RadioFilters: React.FC = () => {
   );
 };
 
-export default RadioFilters;
+const RadioFiltersWithSuspense: React.FC = (props) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <RadioFilters {...props} />
+  </Suspense>
+);
+
+export default RadioFiltersWithSuspense;

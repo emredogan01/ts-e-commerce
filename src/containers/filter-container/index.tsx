@@ -1,3 +1,5 @@
+"use client";
+
 import CheckBoxFilter from "@/components/CheckboxFilter";
 import RadioFilters from "@/components/RadioFilters";
 import React from "react";

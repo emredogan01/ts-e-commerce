@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Pagination,
@@ -26,7 +28,7 @@ const PaginationComp: React.FC = () => {
       newSearchParams.set("limit", limit.toString());
       router.replace(`?${newSearchParams.toString()}`);
     }
-  }, []);
+  }, [searchParams, limit, router]);
 
   const handlePageChange = (page: number) => {
     const newSearchParams = new URLSearchParams(searchParams.toString());
@@ -115,4 +117,10 @@ const PaginationComp: React.FC = () => {
   );
 };
 
-export default PaginationComp;
+const PaginationCompWithSuspense: React.FC = (props) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <PaginationComp {...props} />
+  </Suspense>
+);
+
+export default PaginationCompWithSuspense;

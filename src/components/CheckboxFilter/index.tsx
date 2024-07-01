@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+"use client";
+
+import React, { Suspense, useEffect } from "react";
 import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
 import { useCheckBoxFilterState } from "./helpers";
@@ -58,4 +60,10 @@ const CheckBoxFilter: React.FC<IFilters> = ({ type, values, name }) => {
   );
 };
 
-export default CheckBoxFilter;
+const CheckBoxFilterWithSuspense: React.FC<IFilters> = (props) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <CheckBoxFilter {...props} />
+  </Suspense>
+);
+
+export default CheckBoxFilterWithSuspense;

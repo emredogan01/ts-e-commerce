@@ -1,5 +1,6 @@
-import React from "react";
-import { Product } from "@/types";
+"use client";
+
+import React, { Suspense, useEffect } from "react";
 import Card from "@/components/Card";
 import CardSkeleton from "@/components/Card/CardSkeleton";
 import { FaFilter } from "react-icons/fa";
@@ -10,14 +11,22 @@ import useFilterNames from "@/store/filterNames";
 import NotFoundProduct from "@/components/NotFoundProduct";
 import PaginationComp from "@/components/PaginationComp";
 import useProducts from "@/store/products";
+import { useSearchParams } from "next/navigation";
 
-interface IProductsContainerProps {
-  products: Product[];
-}
-
-const ProductsContainer: React.FC<IProductsContainerProps> = ({ products }) => {
+const ProductsContainer: React.FC = () => {
+  const searchParams = useSearchParams();
   const { brands, models } = useFilterNames((state) => state);
   const { isLoading, error } = useProducts((state) => state);
+  const products = useProducts((state) => state.products);
+  const fetchProducts = useProducts((state) => state.fetchProducts);
+
+  useEffect(() => {
+    const params: Record<string, string> = {};
+    searchParams.forEach((value, key) => {
+      params[key] = value.toString();
+    });
+    fetchProducts(params);
+  }, [searchParams, fetchProducts]);
 
   const hasProducts = products.length > 0;
 
@@ -63,4 +72,10 @@ const ProductsContainer: React.FC<IProductsContainerProps> = ({ products }) => {
   );
 };
 
-export default ProductsContainer;
+const ProductsContainerWithSuspense: React.FC = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ProductsContainer />
+  </Suspense>
+);
+
+export default ProductsContainerWithSuspense;

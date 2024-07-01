@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { Suspense } from "react";
 import z from "zod";
 import { Form, FormItem, FormControl, FormField } from "@/components/ui/form";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -73,4 +75,10 @@ const SearchForm: React.FC<SearchFormProps> = React.memo(({ onSubmit }) => {
 
 SearchForm.displayName = "SearchForm";
 
-export default SearchForm;
+const SearchFormWithSuspense: React.FC<SearchFormProps> = (props) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <SearchForm {...props} />
+  </Suspense>
+);
+
+export default SearchFormWithSuspense;
