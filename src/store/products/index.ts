@@ -64,7 +64,7 @@ const useProducts = create<ProductState>((set) => ({
       console.error("Failed to fetch products:", error);
       set({ isLoading: false, error: false });
     }
-  }, 200),
+  }, 300),
 }));
 
 export default useProducts;
