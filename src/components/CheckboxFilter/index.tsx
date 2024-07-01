@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
 import { useCheckBoxFilterState } from "./helpers";
@@ -16,6 +16,8 @@ const CheckBoxFilter: React.FC<IFilters> = ({ type, values, name }) => {
     handleCheckboxChange,
     handleSearchTermChange,
   } = useCheckBoxFilterState(type, null);
+
+  useEffect(() => {}, []);
 
   const filteredValues = values.filter((item) =>
     item.toLowerCase().includes(searchTerm.toLowerCase())
