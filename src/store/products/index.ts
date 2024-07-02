@@ -34,7 +34,7 @@ const useProducts = create<ProductState>((set) => ({
         set({
           products: [],
           isLoading: false,
-          error: false,
+          error: true,
         });
         throw new Error("Network response was not ok");
       }
@@ -49,8 +49,12 @@ const useProducts = create<ProductState>((set) => ({
           set({
             products: [],
             isLoading: false,
-            error: true,
+            error: false,
           });
+
+          setTimeout(() => {
+            set({ error: true });
+          }, 500);
         }
         return;
       }
@@ -62,9 +66,9 @@ const useProducts = create<ProductState>((set) => ({
       });
     } catch (error) {
       console.error("Failed to fetch products:", error);
-      set({ isLoading: false, error: false });
+      set({ isLoading: false, error: true });
     }
-  }, 300),
+  }, 200),
 }));
 
 export default useProducts;

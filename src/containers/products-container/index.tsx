@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Card from "@/components/Card";
 import CardSkeleton from "@/components/Card/CardSkeleton";
 import { FaFilter } from "react-icons/fa";
@@ -20,20 +20,30 @@ const ProductsContainer: React.FC = () => {
   const products = useProducts((state) => state.products);
   const fetchProducts = useProducts((state) => state.fetchProducts);
 
+  const [firstLoad, setFirstLoad] = useState(true);
+
   useEffect(() => {
     const params: Record<string, string> = {};
     searchParams.forEach((value, key) => {
       params[key] = value.toString();
     });
-    fetchProducts(params);
-  }, [searchParams, fetchProducts]);
+
+    const fetchData = async () => {
+      await fetchProducts(params);
+      if (firstLoad) {
+        setFirstLoad(false);
+      }
+    };
+
+    fetchData();
+  }, [searchParams, fetchProducts, firstLoad]);
 
   const hasProducts = products.length > 0;
 
   return (
     <div className="relative h-full flex min-h-screen justify-center pb-12">
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 w-full">
-        {isLoading ? (
+        {firstLoad && isLoading ? (
           Array(12)
             .fill(0)
             .map((_, index) => (
@@ -41,7 +51,7 @@ const ProductsContainer: React.FC = () => {
                 <CardSkeleton />
               </div>
             ))
-        ) : !hasProducts && !isLoading ? (
+        ) : !hasProducts && error ? (
           <div className="col-span-full mt-20">
             <NotFoundProduct />
           </div>
@@ -52,6 +62,15 @@ const ProductsContainer: React.FC = () => {
             </div>
           ))
         )}
+        {isLoading &&
+          !firstLoad &&
+          Array(12)
+            .fill(0)
+            .map((_, index) => (
+              <div key={index} className="w-full">
+                <CardSkeleton />
+              </div>
+            ))}
       </div>
 
       <div className="sm:hidden fixed bottom-0 left-0 mb-20 ml-4 w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
