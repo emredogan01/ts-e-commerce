@@ -10,7 +10,6 @@ const ClearBasket: React.FC = () => {
 
   const handleClearBasket = () => {
     clearBasket();
-    console.log("Basket Cleared!");
   };
 
   return (
