@@ -4,7 +4,7 @@ This project is a shopping web application built using Next.js, Zustand for stat
 
 ## Live Demo
 
-Check out the live demo: [Shopping Web](https://ts-e-commerce-rho.vercel.app/products?limit=12&page=1&sortBy=price&order=asc)
+Check out the live demo: [Shopping Web](https://ts-e-commerce-rho.vercel.app/products?limit=12&page=1)
 
 ## Technologies Used
 
