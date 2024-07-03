@@ -45,6 +45,10 @@ Open http://localhost:3000 in your browser to see the app.
 - **Custom Hooks**: Custom hooks are utilized for managing filters and pagination.
 - **Loading States**: Skeleton loading screens are implemented to improve perceived performance.
 
+## Sort Parameters
+
+For the available sort parameters and their usage, refer to the [API documentation](https://github.com/mockapi-io/docs/wiki/Code-examples).
+
 ## Deployment
 
 The project is deployed using Vercel. For deployment details, refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment).
