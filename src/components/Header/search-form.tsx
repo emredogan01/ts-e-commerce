@@ -1,5 +1,3 @@
-"use client";
-
 import React, { Suspense } from "react";
 import z from "zod";
 import { Form, FormItem, FormControl, FormField } from "@/components/ui/form";

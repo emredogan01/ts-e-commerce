@@ -1,5 +1,3 @@
-"use client";
-
 import { urlValues } from "./urlValues";
 import { useRouter } from "next/navigation";
 
