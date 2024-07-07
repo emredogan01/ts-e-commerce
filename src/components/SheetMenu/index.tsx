@@ -24,7 +24,7 @@ const SheetMenu: React.FC<SheetMenuProps> = ({
 }) => {
   return (
     <Sheet {...rest}>
-      <SheetTrigger className="pr-2">{triggerIcon}</SheetTrigger>
+      <SheetTrigger className="">{triggerIcon}</SheetTrigger>
       <SheetContent className="overflow-y-auto" side={side}>
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>

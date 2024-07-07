@@ -13,18 +13,28 @@ import useBasketStore from "@/store/basket";
 import SheetMenu from "../SheetMenu";
 import ProductsQuantity from "../ProductsQuantity";
 import ClearBasket from "../ClearBasket";
+import { usePathname } from "next/navigation";
 
 const Header: React.FC = () => {
+  const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const totalPrice = useBasketStore((state) => state.totalPrice);
+  const totalItems = useBasketStore((state) => state.items.length);
+  console.log(totalItems);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     const { search } = data;
 
-    const currentParams = new URLSearchParams(searchParams.toString());
-    currentParams.set("search", search);
-    router.push(`?${currentParams.toString()}`);
+    if (pathname.includes("/products/")) {
+      router.push(
+        `/products?limit=12&page=1&search=${encodeURIComponent(search)}`
+      );
+    } else {
+      const currentParams = new URLSearchParams(searchParams.toString());
+      currentParams.set("search", search);
+      router.push(`?${currentParams.toString()}`);
+    }
   };
 
   return (
@@ -57,7 +67,18 @@ const Header: React.FC = () => {
                 <SheetMenu
                   title="My Basket"
                   side="right"
-                  triggerIcon={<FaShoppingBasket size={35} />}
+                  triggerIcon={
+                    <div className="flex items-center relative">
+                      <FaShoppingBasket size={35} />
+                      {totalItems === 0 ? (
+                        ""
+                      ) : (
+                        <span className="absolute bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex justify-center items-center top-0 right-0">
+                          {totalItems}
+                        </span>
+                      )}
+                    </div>
+                  }
                 >
                   <ProductsQuantity />
                   <ClearBasket />

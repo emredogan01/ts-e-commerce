@@ -77,7 +77,7 @@ const ProductsContainer: React.FC = () => {
         <SheetMenu
           title="My Basket"
           side="left"
-          triggerIcon={<FaFilter size={15} className="text-white" />}
+          triggerIcon={<FaFilter size={17} className="text-white" />}
         >
           <RadioFilters />
           <CheckBoxFilter type="model" values={models} name="Model" />

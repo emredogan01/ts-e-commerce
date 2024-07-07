@@ -10,7 +10,7 @@ const FilterContainer = () => {
   const brands = fetchFilterNames((state) => state.brands);
 
   return (
-    <div className="pl-1">
+    <div className="pl-1 min-w-[200px]">
       <RadioFilters />
       <CheckBoxFilter name="Models" type="model" values={models} />
       <CheckBoxFilter name="Brands" type="brand" values={brands} />

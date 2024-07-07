@@ -8,7 +8,7 @@ const Products = () => {
   return (
     <MaxWidthWrapper className="grid grid-cols-1 sm:grid-cols-[1fr_minmax(0,_4fr)_1fr] w-full">
       {/* filter section */}
-      <section className="hidden sm:flex flex-col items-center">
+      <section className="hidden sm:flex flex-col items-center ">
         <FilterContainer />
       </section>
       {/* products section */}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Product } from "@/types";
 import { Button } from "../ui/button";
 import useBasketStore from "@/store/basket";
+import Link from "next/link";
 
 interface ICardProps {
   card: Product;
@@ -24,13 +25,15 @@ const Card: React.FC<ICardProps> = ({ card }) => {
   return (
     <div className="flex flex-col border-2 border-gray w-[160px] h-[280px] justify-between p-1 rounded-md gap-2">
       <div className="relative w-full h-1/2">
-        <Image
-          className="rounded-md"
-          src="/images.jpeg"
-          layout="fill"
-          objectFit="cover"
-          alt="gray-img"
-        />
+        <Link href={`/products/${card.id}`}>
+          <Image
+            className="rounded-md"
+            src="/images.jpeg"
+            layout="fill"
+            objectFit="cover"
+            alt="gray-img"
+          />
+        </Link>
       </div>
       <div className="flex flex-col items-start justify-center gap-1 font-light">
         <div className="text-sm font-bold  text-green-600">{card.price}</div>
