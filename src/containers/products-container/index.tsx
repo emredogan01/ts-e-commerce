@@ -28,6 +28,14 @@ const ProductsContainer: React.FC = () => {
       params[key] = value.toString();
     });
 
+    if (!params.limit) {
+      params.limit = "12";
+    }
+
+    if (!params.page) {
+      params.page = "1";
+    }
+
     const fetchData = async () => {
       await fetchProducts(params);
       if (firstLoad) {

@@ -21,10 +21,11 @@ interface SearchFormProps {
 const SearchForm: React.FC<SearchFormProps> = React.memo(({ onSubmit }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const searchValue = searchParams.get("search") || "";
   const searchForm = useForm<FormValues>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
-      search: "",
+      search: searchValue,
     },
   });
 
